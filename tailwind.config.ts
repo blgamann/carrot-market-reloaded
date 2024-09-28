@@ -10,4 +10,5 @@ const config: Config = {
   theme: {},
   plugins: [forms],
 };
+
 export default config;

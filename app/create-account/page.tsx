@@ -1,44 +1,53 @@
-import FormButton from "@/components/form-btn";
-import FormInput from "@/components/form-input";
+"use client";
+
+import Button from "@/components/button";
+import Input from "@/components/input";
 import SocialLogin from "@/components/social-login";
+import { useFormState } from "react-dom";
+import { createAccount } from "./actions";
 
 export default function CreateAccount() {
+  const [state, dispatch] = useFormState(createAccount, null);
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
         <h1 className="text-2xl">안녕하세요!</h1>
         <h2 className="text-xl">Fill in the form below to join!</h2>
       </div>
-      <form className="flex flex-col gap-3">
-        <FormInput
+      <form action={dispatch} className="flex flex-col gap-3">
+        <Input
           name="username"
           type="text"
           placeholder="Username"
           required
-          errors={[]}
+          errors={state?.fieldErrors.username}
+          minLength={3}
+          maxLength={10}
         />
-        <FormInput
+        <Input
           name="email"
           type="email"
           placeholder="Email"
           required
-          errors={[]}
+          errors={state?.fieldErrors.email}
         />
-        <FormInput
+        <Input
           name="password"
           type="password"
           placeholder="Password"
+          minLength={4}
           required
-          errors={[]}
+          errors={state?.fieldErrors.password}
         />
-        <FormInput
-          name="confirmPassword"
+        <Input
+          name="confirm_password"
           type="password"
           placeholder="Confirm Password"
           required
-          errors={[]}
+          minLength={4}
+          errors={state?.fieldErrors.confirm_password}
         />
-        <FormButton loading={false} text="Create account" />
+        <Button text="Create account" />
       </form>
       <SocialLogin />
     </div>

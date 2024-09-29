@@ -1,26 +1,21 @@
-interface FormInputProps {
+import { InputHTMLAttributes } from "react";
+
+interface InputProps {
   name: string;
-  type: string;
-  placeholder: string;
-  required: boolean;
-  errors: string[];
+  errors?: string[];
 }
 
-export default function FormInput({
+export default function Input({
   name,
-  type,
-  placeholder,
-  required,
-  errors,
-}: FormInputProps) {
+  errors = [],
+  ...rest
+}: InputProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="flex flex-col gap-2">
       <input
         name={name}
         className="bg-transparent rounded-md w-full h-10 focus:outline-none ring-2 focus:ring-4 transition ring-neutral-200 focus:ring-orange-500 border-none placeholder:text-neutral-400"
-        type={type}
-        placeholder={placeholder}
-        required={required}
+        {...rest}
       />
       {errors.map((error, index) => (
         <span key={index} className="text-red-500 font-medium">

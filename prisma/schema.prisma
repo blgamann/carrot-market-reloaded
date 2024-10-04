@@ -18,7 +18,7 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  smsTokens  SMSToken[]
+  smsTokens SMSToken[]
 }
 
 model SMSToken {
@@ -27,8 +27,6 @@ model SMSToken {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
 }
-
-

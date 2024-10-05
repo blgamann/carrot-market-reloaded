@@ -22,16 +22,12 @@ export default async function Profile() {
   const logOut = async () => {
     "use server";
     const session = await getSession();
-    session.destroy();
+    await session.destroy();
     redirect("/");
   };
-
   return (
     <div>
-      <h1>Profile</h1>
-      <p>Username: {user?.username}</p>
-      <p>Email: {user?.email}</p>
-
+      <h1>Welcome! {user?.username}!</h1>
       <form action={logOut}>
         <button>Log out</button>
       </form>

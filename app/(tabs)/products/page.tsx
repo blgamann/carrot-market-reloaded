@@ -11,10 +11,14 @@ async function getProducts() {
       id: true,
     },
   });
+
+  console.log(products);
+
   return products;
 }
 
 export default async function Products() {
+  console.log("test");
   const products = await getProducts();
   return (
     <div className="p-5 flex flex-col gap-5">
